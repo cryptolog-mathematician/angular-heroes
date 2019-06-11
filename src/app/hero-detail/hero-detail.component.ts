@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,7 +13,7 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
-  @Input() hero: Hero;
+hero: Hero;     // @Input() eger rooterla yonlendirme yapilmiyorsa bunu kullanmak zorundasin ve en üst tarafa eklemek zorundasin
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +33,11 @@ export class HeroDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+     this.heroService.updateHero(this.hero)
+       .subscribe(() => this.goBack());
   }
 
 }
